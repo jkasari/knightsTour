@@ -1,11 +1,14 @@
-main:
-	g++ -std=c++17 main.cpp -o run
+main: board
+	g++ -std=c++17 main.cpp board.o -o run
 
-test:
-	g++ -std=c++17 test.cpp -o test
+test: board
+	g++ -std=c++17 test.cpp board.o -o test
 	./test
 
+board:
+	g++ -std=c++17 board.cpp -c
+
 clean:
-	rm -rf run test
+	rm -rf run test *.o
 	
-.PHONY: main test clean
+.PHONY: main test board clean
