@@ -1,5 +1,6 @@
 #ifndef ChessBoard_h
 #define ChessBoard_h
+#include "knight.h"
 #include <iostream>
 
 class ChessBoard {
