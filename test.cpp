@@ -2,6 +2,7 @@
 #include <vector>
 #include <utility>
 #include "knight.h"
+#include "board.h"
 #include "nuttiest/nuttiest.hpp"
 
 using namespace std;
@@ -57,6 +58,34 @@ int main() {
         assert_eq(expectedMoves[i].first, actualMoves[i].first);
         assert_eq(expectedMoves[i].second, actualMoves[i].second);
       }
+    }
+  }
+  section("newMoveOptions") {
+    unit_test("newMoveOptions") {
+      ChessBoard board1;
+      int8_t numberOfOptions = board1.newMoveOptions(0, 0);
+      assert_eq(numberOfOptions, 2);
+
+      board1.waterMark(1, 2);
+      numberOfOptions = board1.newMoveOptions(0, 0);
+      assert_eq(numberOfOptions, 1);
+
+      board1.waterMark(2, 1);
+      numberOfOptions = board1.newMoveOptions(0, 0);
+      assert_eq(numberOfOptions, 0);
+    }
+    unit_test("newMoveOptions") {
+      ChessBoard board1;
+      int8_t numberOfOptions = board1.newMoveOptions(4, 4);
+      assert_eq(numberOfOptions, 8);
+
+      board1.waterMark(6, 3);
+      numberOfOptions = board1.newMoveOptions(4, 4);
+      assert_eq(numberOfOptions, 7);
+
+      board1.waterMark(3, 6);
+      numberOfOptions = board1.newMoveOptions(4, 4);
+      assert_eq(numberOfOptions, 6);
     }
   }
 

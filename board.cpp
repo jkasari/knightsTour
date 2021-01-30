@@ -34,6 +34,19 @@ void ChessBoard::waterMark(int8_t row, int8_t col) {
     chessBoard[row][col] = '@';
 }
 
+
+int8_t ChessBoard::newMoveOptions(int8_t row, int8_t col) {
+    Knight arthur(row, col);
+    int8_t previousMoves = 0;
+    std::vector<Square> movesOnBoard = arthur.potentialMoves();
+    for(int i = 0; i < movesOnBoard.size(); ++i) {
+        if(chessBoard[movesOnBoard[i].first][movesOnBoard[i].second] == '@') {
+            previousMoves += 1;
+        }
+    }
+    return movesOnBoard.size() - previousMoves;
+}
+
 // +----+----+----+----+----+----+----+----+
 // | 00 | 01 | 02 | 03 | 04 | 05 | 06 | 07 |
 // |----|----|----|----|----|----|----|----|
