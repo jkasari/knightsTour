@@ -3,18 +3,18 @@
 
 
 std::ostream& operator<<(std::ostream& stream, const ChessBoard& chessBoard) {
-    stream << "+----+----+----+----+----+----+----+----+" << std::endl;
+    stream << "+---+---+---+---+---+---+---+---+" << std::endl;
     for(int i = 0; i < 8; i++) {
         stream << "| ";
         for(int j = 0; j < 8; j++) {
-            stream << std::setfill('0') << std::setw(2);
-            stream << static_cast<int>(chessBoard.chessBoard[i][j]) << " | ";
+        //    stream << std::setfill('0') << std::setw(2);
+            stream << static_cast<char>(chessBoard.chessBoard[i][j]) << " | ";
         }
         if(i < 7) {
-          stream << std::endl << "|----|----|----|----|----|----|----|----|" << std::endl;
+          stream << std::endl << "|---|---|---|---|---|---|---|---|" << std::endl;
         }
     }
-    stream << std::endl << "+----+----+----+----+----+----+----+----+" << std::endl;
+    stream << std::endl << "+---+---+---+---+---+---+---+---+" << std::endl;
     return stream;
 }
 
@@ -22,13 +22,16 @@ std::ostream& operator<<(std::ostream& stream, const ChessBoard& chessBoard) {
 ChessBoard::ChessBoard() {
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++) {
-            chessBoard[i][j] = 10 * i + j;
+            chessBoard[i][j] = ' ';
         }
     }
 }
 
 void ChessBoard::waterMark(int8_t row, int8_t col) {
-    chessBoard[row][col] = 69;
+    if(0 > row || row > 7 || 0 > col || col > 7) {
+        return;
+    }
+    chessBoard[row][col] = '@';
 }
 
 // +----+----+----+----+----+----+----+----+

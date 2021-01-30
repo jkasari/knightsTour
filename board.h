@@ -10,7 +10,7 @@ class ChessBoard {
  public:
   ChessBoard();
   /**
-  * Leaves an "69" at any given point on the chessboard.
+  * Leaves an '@' at any given point on the chessboard.
   * Planning on using this as a way for board to keep track
   * of where the knight as been previously.
   */
@@ -24,7 +24,7 @@ class ChessBoard {
   int8_t newMoveOptions(int8_t, int8_t);
 
  private:
-  int8_t chessBoard[8][8];
+  char chessBoard[8][8];
 
 };
 
