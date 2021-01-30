@@ -27,6 +27,10 @@ ChessBoard::ChessBoard() {
     }
 }
 
+void ChessBoard::waterMark(int8_t row, int8_t col) {
+    chessBoard[row][col] = 69;
+}
+
 // +----+----+----+----+----+----+----+----+
 // | 00 | 01 | 02 | 03 | 04 | 05 | 06 | 07 |
 // |----|----|----|----|----|----|----|----|

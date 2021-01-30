@@ -9,6 +9,19 @@ class ChessBoard {
 
  public:
   ChessBoard();
+  /**
+  * Leaves an "69" at any given point on the chessboard.
+  * Planning on using this as a way for board to keep track
+  * of where the knight as been previously.
+  */
+  void waterMark(int8_t, int8_t);
+  /**
+   * This checks a potential move on a live chessboard and
+   * returns number of possible ways to get into that move.
+   * This plays by the rules of the knight class and also
+   * checks for "*" if the knight had already touched that spot.
+   */
+  int8_t newMoveOptions(int8_t, int8_t);
 
  private:
   int8_t chessBoard[8][8];
