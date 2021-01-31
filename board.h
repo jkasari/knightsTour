@@ -9,12 +9,14 @@ class ChessBoard {
 
  public:
   ChessBoard();
+
+
   /**
-  * Leaves an '@' at any given point on the chessboard.
-  * Planning on using this as a way for board to keep track
-  * of where the knight as been previously.
-  */
-  void waterMark(int8_t, int8_t);
+   * This moves a knight to any given location and leaves a watermark once
+   * it's there.
+   */
+  void moveKnight(int8_t, int8_t);
+
   /**
    * This checks a potential move on a live chessboard and
    * returns number of possible ways to get into that move.
@@ -22,6 +24,14 @@ class ChessBoard {
    * checks for "*" if the knight had already touched that spot.
    */
   int8_t newMoveOptions(int8_t, int8_t);
+
+  int8_t findSmallestIndex(std::vector<int8_t>);
+
+  /**
+   * This takes a current knight location and returns the best option for a
+   * new knight location.
+   */
+  Square findNextMove(int8_t, int8_t);
 
  private:
   char chessBoard[8][8];

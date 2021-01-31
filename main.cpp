@@ -1,18 +1,28 @@
 #include <iostream>
 #include "board.h"
+#include "knight.h"
 
 using namespace std;
 
 
 int main() {
 
-  ChessBoard chessBoard1;
+  ChessBoard board1;
+  int8_t currentRow = 2;
+  int8_t currentCol = 4;
+  int8_t futureRow;
+  int8_t futureCol;
 
-  chessBoard1.waterMark(7, 7);
-  chessBoard1.waterMark(0, 4);
-  chessBoard1.waterMark(2, 5);
+  for(int i = 0; i < 2; ++i) {
+    board1.moveKnight(currentRow, currentCol);
+    cout << currentRow << "  " << currentCol << endl;
+    //cout << board1 << endl;
 
-  cout << chessBoard1 << endl;
+  //  futureRow = board1.findNextMove(currentRow, currentCol).first;
+  //  futureCol = board1.findNextMove(currentRow, currentCol).second;
+  //  currentRow = futureRow;
+  //  currentCol = futureCol;
+  }
 
   return 0;
 }
