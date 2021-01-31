@@ -69,26 +69,24 @@ int main() {
       int8_t numberOfOptions = board1.newMoveOptions(0, 0);
       assert_eq(numberOfOptions, 2);
 
-      board1.moveKnight(1, 2);
+      board1.moveKnightPast(1, 2);
       numberOfOptions = board1.newMoveOptions(0, 0);
       assert_eq(numberOfOptions, 1);
 
-      board1.moveKnight(2, 1);
+      board1.moveKnightPast(2, 1);
       numberOfOptions = board1.newMoveOptions(0, 0);
-      assert_eq(numberOfOptions, 10);
-      //This is because newMoveOptions returns a 10 if the potential moves reach zero.
-      //Yes this is dumb, but it works.
+      assert_eq(numberOfOptions, 0);
     }
     unit_test("newMoveOptions") {
       ChessBoard board1;
       int8_t numberOfOptions = board1.newMoveOptions(4, 4);
       assert_eq(numberOfOptions, 8);
 
-      board1.moveKnight(6, 3);
+      board1.moveKnightPast(6, 3);
       numberOfOptions = board1.newMoveOptions(4, 4);
       assert_eq(numberOfOptions, 7);
 
-      board1.moveKnight(3, 6);
+      board1.moveKnightPast(3, 6);
       numberOfOptions = board1.newMoveOptions(4, 4);
       assert_eq(numberOfOptions, 6);
     }
