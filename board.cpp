@@ -45,7 +45,7 @@ int8_t ChessBoard::newMoveOptions(int8_t row, int8_t col) {
     Knight arthur(row, col);
     int8_t previousLocations = 0;
     if(chessBoard[row][col] == '@') {
-        return 0;
+        return 10; // Again making sure you never get a zero value out of this function.
     }
     std::vector<Square> movesOnBoard = arthur.potentialMoves();
     for(int i = 0; i < movesOnBoard.size(); ++i) {
@@ -59,8 +59,14 @@ int8_t ChessBoard::newMoveOptions(int8_t row, int8_t col) {
     return movesOnBoard.size() - previousLocations;
 }
 
+void ChessBoard::moveKnightCurrent(int8_t row, int8_t col) {
+    if(0 > row || row > 7 || 0 > col || col > 7) {
+        return;
+    }
+    chessBoard[row][col] = '!';
+}
 
-void ChessBoard::moveKnight(int8_t row, int8_t col) {
+void ChessBoard::moveKnightPast(int8_t row, int8_t col) {
     if(0 > row || row > 7 || 0 > col || col > 7) {
         return;
     }

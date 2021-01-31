@@ -12,10 +12,18 @@ class ChessBoard {
 
 
   /**
-   * This moves a knight to any given location and leaves a watermark once
-   * it's there.
+   * This leaves a '#' to show exactly where the knight currently is.
+   * This is just for display purposes and when used with out |moveKnightPast|
+   * will cause the program to crash. Make sure to pass both move knight
+   * functions the same values!!!
    */
-  void moveKnight(int8_t, int8_t);
+  void moveKnightCurrent(int8_t, int8_t);
+
+  /**
+   * This leaves a '@' mark after the knight as left the spot. This mark
+   * is what all the functions are looking for when choosing the next move.
+   */
+  void moveKnightPast(int8_t, int8_t);
 
   /**
    * This checks a potential move on a live chessboard and
