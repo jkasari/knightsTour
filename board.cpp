@@ -45,16 +45,14 @@ int8_t ChessBoard::newMoveOptions(int8_t row, int8_t col) {
     Knight arthur(row, col);
     int8_t previousLocations = 0;
     if(chessBoard[row][col] == '@') {
-        return 10; // Again making sure you never get a zero value out of this function.
+        return 8; //This makes sure that a location with no exits only gets picked when there are
+                  // literally no other options. IE the end of the game. 
     }
     std::vector<Square> movesOnBoard = arthur.potentialMoves();
     for(int i = 0; i < movesOnBoard.size(); ++i) {
         if(chessBoard[movesOnBoard[i].first][movesOnBoard[i].second] == '@') {
             previousLocations += 1;
         }
-    }
-    if(movesOnBoard.size() - previousLocations == 0) {
-        return 10;//This makes sure you never feed |findSmallestIndex| a zero value. I'm sure there is a better way to do this.
     }
     return movesOnBoard.size() - previousLocations;
 }
