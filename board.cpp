@@ -1,20 +1,21 @@
 #include "board.h"
+#include "knight.h"
 #include <iomanip>
 
 
 std::ostream& operator<<(std::ostream& stream, const ChessBoard& chessBoard) {
-    stream << "+----+----+----+----+----+----+----+----+" << std::endl;
+    stream << "+---+---+---+---+---+---+---+---+" << std::endl;
     for(int i = 0; i < 8; i++) {
         stream << "| ";
         for(int j = 0; j < 8; j++) {
-            stream << std::setfill('0') << std::setw(2);
-            stream << static_cast<int>(chessBoard.chessBoard[i][j]) << " | ";
+        //    stream << std::setfill('0') << std::setw(2);
+            stream << static_cast<char>(chessBoard.chessBoard[i][j]) << " | ";
         }
         if(i < 7) {
-          stream << std::endl << "|----|----|----|----|----|----|----|----|" << std::endl;
+          stream << std::endl << "|---|---|---|---|---|---|---|---|" << std::endl;
         }
     }
-    stream << std::endl << "+----+----+----+----+----+----+----+----+" << std::endl;
+    stream << std::endl << "+---+---+---+---+---+---+---+---+" << std::endl;
     return stream;
 }
 
@@ -22,9 +23,67 @@ std::ostream& operator<<(std::ostream& stream, const ChessBoard& chessBoard) {
 ChessBoard::ChessBoard() {
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++) {
-            chessBoard[i][j] = 10 * i + j;
+            chessBoard[i][j] = ' ';
         }
     }
+}
+
+int8_t ChessBoard::findSmallestIndex(std::vector<int8_t> moveValues) {
+    int8_t smallestVal = 8;
+    int8_t smallestIndex;
+    for(int i = 0; i < moveValues.size(); ++i) {
+       if(moveValues[i] < smallestVal) {
+           smallestVal = moveValues[i];
+           smallestIndex = i;
+       }
+    }
+    return smallestIndex;
+}
+
+
+int8_t ChessBoard::newMoveOptions(int8_t row, int8_t col) {
+    Knight arthur(row, col);
+    int8_t previousLocations = 0;
+    if(chessBoard[row][col] == '@') {
+        return 10; // Again making sure you never get a zero value out of this function.
+    }
+    std::vector<Square> movesOnBoard = arthur.potentialMoves();
+    for(int i = 0; i < movesOnBoard.size(); ++i) {
+        if(chessBoard[movesOnBoard[i].first][movesOnBoard[i].second] == '@') {
+            previousLocations += 1;
+        }
+    }
+    if(movesOnBoard.size() - previousLocations == 0) {
+        return 10;//This makes sure you never feed |findSmallestIndex| a zero value. I'm sure there is a better way to do this.
+    }
+    return movesOnBoard.size() - previousLocations;
+}
+
+void ChessBoard::moveKnightCurrent(int8_t row, int8_t col) {
+    if(0 > row || row > 7 || 0 > col || col > 7) {
+        return;
+    }
+    chessBoard[row][col] = '!';
+}
+
+void ChessBoard::moveKnightPast(int8_t row, int8_t col) {
+    if(0 > row || row > 7 || 0 > col || col > 7) {
+        return;
+    }
+    chessBoard[row][col] = '@';
+}
+
+
+Square ChessBoard::findNextMove(int8_t row, int8_t col) {
+    Knight Arthur(row, col);
+    int8_t indexOfNextMove;
+    std::vector<Square> nextMoves = Arthur.potentialMoves();
+    std::vector<int8_t> nextMoveVals;
+    for(int i = 0; i < nextMoves.size(); ++i) {
+        nextMoveVals.push_back(newMoveOptions(nextMoves[i].first, nextMoves[i].second));
+    }
+    indexOfNextMove = findSmallestIndex(nextMoveVals);
+    return nextMoves[indexOfNextMove];
 }
 
 // +----+----+----+----+----+----+----+----+

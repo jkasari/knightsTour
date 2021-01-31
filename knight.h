@@ -9,6 +9,11 @@ class Knight {
 
  public:
   Knight(int8_t, int8_t);
+  /**
+   * This gives you a vector of all the possible new locations for the
+   * knight. This function only cares about staying on the board. It has
+   * no idea where the knight as been previously.
+   */
   std::vector<Square> potentialMoves();
 
  private:
