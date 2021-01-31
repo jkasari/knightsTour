@@ -5,6 +5,12 @@
 using namespace std;
 
 
+void clearScreen(void) {
+   for(int i = 0; i < 100; ++i) {
+    cout << endl;
+   }
+}
+
 int main(int32_t argc, char** argv) {
 
   if(argc != 3) {
@@ -33,6 +39,7 @@ int main(int32_t argc, char** argv) {
     cout.width(17);
     cout << i + 1 << endl;
     usleep(100000);
+    clearScreen();
     board1.moveKnightPast(currentRow, currentCol);
 
     futureRow = board1.findNextMove(currentRow, currentCol).first;
